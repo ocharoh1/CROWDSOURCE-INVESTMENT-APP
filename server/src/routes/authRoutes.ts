@@ -1,4 +1,4 @@
-// path between response and requests
+// path between response and request
 import express from 'express';
 import { Router } from 'express';
 import { RegisterUser,loginUser } from '../controllers/authController';
