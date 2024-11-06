@@ -44,7 +44,7 @@ model Idea {
 
 model Vote {
   id       Int     @id @default(autoincrement())
-  value    Int     // 1 for upvote, -1 for downvote
+  isVoted  Boolean  @default(false) // Type of vote, either "idea" or "comment"
   user     User    @relation(fields: [userId], references: [ userId ])
   userId   Int
   idea     Idea    @relation(fields: [ideaId], references: [id])
@@ -57,8 +57,8 @@ model Vote {
 model Comment {
   id          Int       @id @default(autoincrement())
   content     String
-  user        User      @relation(fields: [userId], references: [ userId ])
-  userId      Int
+  user        User      @relation(fields: [authorId], references: [ userId ])
+  authorId      Int
   idea        Idea      @relation(fields: [ideaId], references: [id])
   ideaId      Int
   parentId    Int?      // Optional field for nested comments (replies)

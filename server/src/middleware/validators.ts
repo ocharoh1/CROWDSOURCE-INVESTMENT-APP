@@ -56,4 +56,5 @@ const validateIdeaInputs =(title:string, description:string, category:string, es
     return null
 }
 
+
 export {validateUserInputs, validateLoginInputs ,validateIdeaInputs}
