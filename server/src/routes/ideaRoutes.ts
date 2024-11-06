@@ -4,11 +4,13 @@ import {
     createIdea, deleteIdea, getIdeas, updateIdea, getIdea
   
 } from '../controllers/ideaController';
+import { authenticateJWT } from '../middleware/authMiddleware';
+
 
 const router = express.Router();
 
 // Route to create a new idea
-router.post('/createideas', createIdea);
+router.post('/createideas',authenticateJWT, createIdea);
 //route to get ideas
 router.get('/getideas', getIdeas);
 //route to delete idea

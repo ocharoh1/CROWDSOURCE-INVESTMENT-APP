@@ -1,38 +1,43 @@
-import  { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { prisma } from '../config/database';
 import { validateIdeaInputs } from '../middleware/validators';
-
-const createIdea = async (req: Request, res: Response) => {
+import { getActiveUserFromToken } from '../utils/authUtilis';
+// Route handler to create an idea
+const createIdea = async (req: any, res: Response) => {
     try {
-        const { title, description,category, estimatedReturn } = req.body;
-        const validationError=validateIdeaInputs(title, description, category, estimatedReturn)
-        if (validationError) {
-            res.status(400).json({ message: validationError })
-            return;
+        // Get the active user from the token in the cookies
+        const user = await getActiveUserFromToken(req);
+
+        // Check if the user is authenticated
+        if (!user) {
+          res.status(401).json({ message: 'User not authenticated' });
+            return
         }
 
-        const userId=5
-             // Create the new idea
-             const newIdea = await prisma.idea.create({
-                data: {
-                    title: title,
-                    description: description,
-                    category: category,
-                    estimatedReturn: estimatedReturn,
-                    authorId:userId,
-                },
-            });       
+        const { title, description, category, estimatedReturn } = req.body;
 
-        res.status(201).json({
+        // Create the new idea with the author's userId
+        const newIdea = await prisma.idea.create({
+            data: {
+                title,
+                description,
+                category,
+                estimatedReturn,
+                authorId: user.userId, // Set authorId from the authenticated user
+            },
+        });
+
+         res.status(201).json({
             message: "Idea created successfully",
-            data: newIdea
+            data: newIdea,
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server error" });
-        return;
+    res.status(500).json({ message: "Server error" });
+    return
     }
-}
+};
+
 
 //delete idea
 const deleteIdea = async (req: Request, res: Response) => {
@@ -81,7 +86,7 @@ const updateIdea = async (req: Request, res: Response) => {
         }
 
         //**** */ Update the idea
-        const idea=  await prisma.idea.update({
+        const idea = await prisma.idea.update({
             where: { id: Number(id) },
             data: {
                 title: title,
@@ -91,10 +96,10 @@ const updateIdea = async (req: Request, res: Response) => {
             }
         });
 
-        res.status(200).json({ 
-            message: "Idea updated successfully" ,
-            updatedidea:idea
-        
+        res.status(200).json({
+            message: "Idea updated successfully",
+            updatedidea: idea
+
         });
         return;
     } catch (error) {

@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { prisma } from '../config/database';
 import bcrypt from 'bcrypt';
 import { validateLoginInputs, validateUserInputs } from '../middleware/validators';
+import { generateToken } from '../utils/authUtilis';
 
 //register user
 const RegisterUser = async (req: Request, res: Response) => {
@@ -13,6 +14,7 @@ const RegisterUser = async (req: Request, res: Response) => {
             return;
         }
 
+        // Check if the user exists using email
 
         const existingUser = await prisma.user.findUnique({
             where: { email: email }
@@ -24,7 +26,7 @@ const RegisterUser = async (req: Request, res: Response) => {
         }
         //encrypt password
         const hashedPassword = await bcrypt.hash(password, 10);
-        // Create new user if not exists
+        // Create new user 
         const newUser = await prisma.user.create({
             data: {
                 name: name,
@@ -32,6 +34,15 @@ const RegisterUser = async (req: Request, res: Response) => {
                 password: hashedPassword,
             },
         });
+
+        //generate token and set token in a cookie
+        const token = generateToken(newUser);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 3600000,
+            });
 
         res.status(201).json({
             message: "User created successfully",
@@ -67,8 +78,16 @@ const loginUser = async (req: Request, res: Response) => {
             res.status(400).json({ message: "Invalid credentials" });
             return;
         }
+        //generate token and set token in a cookie
+        const token = generateToken(existingUser);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',  // set to true for HTTPS in production
+            maxAge: 1000 * 60 * 60 * 24,  // 1 day
+        });
+        
         res.status(200).json({
-            message: "Login successful",
+            message: "Login successful", token,
             user: existingUser
         });
     }
