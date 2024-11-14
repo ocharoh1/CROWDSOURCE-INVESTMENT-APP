@@ -30,7 +30,7 @@ const upvote = async (req: Request, res: Response) => {
         const vote = await prisma.vote.create({
             data: {
             ideaId: Number(ideaId),
-            userId: 1,
+            userId: 12,
             isVoted: true
             }
         });
@@ -44,7 +44,7 @@ const upvote = async (req: Request, res: Response) => {
     }
 }
 
-//downvoting an idea
+//downvoting an ideas
 const downvote = async (req: Request, res: Response) => {
     try {
         const { ideaId } = req.params;

@@ -35,7 +35,7 @@ const RegisterUser = async (req: Request, res: Response) => {
             },
         });
 
-        //generate token and set token in a cookie
+        //generate token and set token in a cookieconsole.log('Register User endpoint
         const token = generateToken(newUser);
         res.cookie('token', token, {
             httpOnly: true,
