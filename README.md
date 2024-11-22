@@ -60,9 +60,10 @@ To run this project locally:
    ```bash
 cd investment-frontend 
 ```
+
  ```bash
  pnpm install
- ``````
+ ```
 
 *Backend*
  ```bash
