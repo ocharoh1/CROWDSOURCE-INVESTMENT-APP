@@ -56,18 +56,20 @@ To run this project locally:
 ```
 2. Install dependencies for both frontend and backend using pnpm:
    *Frontend*
+   
    ```bash
-`cd investment-frontend `
+cd investment-frontend 
+```
  ```bash
- `pnpm install`
+ pnpm install
  ``````
 
 *Backend*
  ```bash
-`cd server `
+cd server 
 ```
  ```bash
- `pnpm install`
+ pnpm install
  ```
 
 3. Set up environment variables:
