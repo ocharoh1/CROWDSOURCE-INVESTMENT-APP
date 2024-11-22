@@ -1,6 +1,6 @@
-# Crowdspace
+# CROWDSOURCE INVESTMENT WEB APPLICATION
 
-Crowdspace is a full-stack web application that connects innovative entrepreneurs with visionary investors. It provides a platform for users to browse, submit, and interact with groundbreaking ideas across various industries.
+Crowdsource is a full-stack web application that connects innovative entrepreneurs with visionary investors. It provides a platform for users to browse, submit, and interact with groundbreaking ideas across various industries.
 
 ## Features
 * User authentication (login and registration)
