@@ -1,3 +1,4 @@
+//page that displays all fetched ideas
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BiHomeAlt, BiInfoCircle, BiCommentDetail, BiEnvelope, BiCalendar, BiEdit, BiSearch, BiUpvote, BiDownvote } from 'react-icons/bi'
