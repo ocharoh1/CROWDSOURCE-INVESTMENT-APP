@@ -51,9 +51,11 @@ Crowdsource is a full-stack web application that connects innovative entrepreneu
 To run this project locally:
 
 1. Clone the repository
+`https://github.com/ocharoh1/CROWDSOURCE-INVESTMENT-APP.git`
 2. Install dependencies for both frontend and backend using pnpm:
-```bash
-cd frontend && pnpm install
+   *Frontend*
+`cd frontend `
+`pnpm install`
 cd ../backend && pnpm install
 ```
 
