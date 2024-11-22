@@ -51,13 +51,24 @@ Crowdsource is a full-stack web application that connects innovative entrepreneu
 To run this project locally:
 
 1. Clone the repository
+```bash
 `https://github.com/ocharoh1/CROWDSOURCE-INVESTMENT-APP.git`
+```
 2. Install dependencies for both frontend and backend using pnpm:
    *Frontend*
-`cd frontend `
-`pnpm install`
-cd ../backend && pnpm install
+   ```bash
+`cd investment-frontend `
+ ```bash
+ `pnpm install`
+ ``````
+
+*Backend*
+ ```bash
+`cd server `
 ```
+ ```bash
+ `pnpm install`
+ ```
 
 3. Set up environment variables:
    * Create a `.env` file in the backend directory
@@ -71,12 +82,12 @@ JWT_SECRET="your_jwt_secret"
 
 4. Start the backend server:
 ```bash
-cd backend && pnpm start
+ pnpm run dev
 ```
 
 5. Start the frontend development server:
 ```bash
-cd frontend && pnpm start
+pnpm run dev
 ```
 
 ## API Endpoints
@@ -99,7 +110,7 @@ The application uses JWT for authentication. Tokens are stored in HTTP-only cook
 
 ## Contributing
 
-Contributions to Crowdspace are welcome. Please ensure that you follow the existing code style and structure when submitting pull requests.
+Contributions to Crowdsource are welcome. Please ensure that you follow the existing code style and structure when submitting pull requests.
 
 ## Package Management
 
@@ -114,8 +125,5 @@ To install pnpm globally:
 npm install -g pnpm
 ```
 
-## License
-[Add your chosen license here]
-
 ## Deployment
-[Add deployment instructions or links to deployed versions here]
+deployment instructions 
