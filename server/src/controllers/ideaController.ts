@@ -122,6 +122,30 @@ const getIdeas = async (req: Request, res: Response) => {
     }
 }
 
+//get idea by title and category
+const getIdeasByTitleAndCategory = async (req: Request, res: Response) => {
+    try {
+        const { title, category } = req.query;
+
+        const ideas = await prisma.idea.findMany({
+            where: {
+                title: {
+                    contains: title as string
+                },
+                category: {
+                    contains: category as string
+                }
+            }
+        });
+
+        res.status(200).json({ data: ideas });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+        return;
+    }
+}
+
 
 //get idea by id
 const getIdea = async (req: Request, res: Response) => {
@@ -146,4 +170,4 @@ const getIdea = async (req: Request, res: Response) => {
 }
 
 
-export { createIdea, deleteIdea, updateIdea, getIdeas, getIdea };
+export { createIdea, deleteIdea, updateIdea, getIdeas, getIdea, getIdeasByTitleAndCategory };

@@ -1,5 +1,6 @@
 import express,{Request,Response} from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import {authRoutes} from './routes/authRoutes';
 import { ideaRoutes } from './routes/ideaRoutes';
 import {votingRoutes} from './routes/votingRoutes';
@@ -9,6 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+app.use(morgan('dev'));
 
 
 // Use the auth routes
